@@ -192,6 +192,182 @@ body {
 }
 
 /* Special styling for Clear/Delete if desired, or keep uniform */
+--text-main: #1c1c1c;
+--text-secondary: #6e6e73;
+--btn-bg: #f2f2f7;
+--btn-hover: #e5e5ea;
+--btn-active: #d1d1d6;
+--accent-color: #ff9f0a;
+--accent-hover: #ffb340;
+--danger-color: #ff3b30;
+}
+
+[data-theme="purple"] {
+    --bg-color: #1a0b2e;
+    --calc-bg: #2d1b4e;
+    --text-main: #ffffff;
+    --text-secondary: #b39ddb;
+    --btn-bg: #432c7a;
+    --btn-hover: #5b3c9d;
+    --btn-active: #704cb3;
+    --accent-color: #00e5ff;
+    --accent-hover: #6effff;
+    --danger-color: #ff4081;
+}
+
+/* Theme Toggler Styles */
+.theme-switch-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+    padding: 0 5px;
+}
+
+.theme-icon {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+    background: none;
+    border: none;
+    padding: 5px;
+}
+
+.theme-icon:hover {
+    color: var(--text-main);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.calculator {
+    background-color: var(--calc-bg);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    padding: 24px;
+    overflow: hidden;
+}
+
+.display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 120px;
+    margin-bottom: 20px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.previous-operand {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    min-height: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.current-operand {
+    color: var(--text-main);
+    font-size: 3rem;
+    font-weight: 300;
+    white-space: nowrap;
+    overflow-x: auto;
+    width: 100%;
+    text-align: right;
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.current-operand::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.btn {
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: var(--btn-bg);
+    color: var(--text-main);
+    font-size: 1.25rem;
+    font-family: inherit;
+    border-radius: 50%;
+    /* Circular buttons */
+    cursor: pointer;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    user-select: none;
+}
+
+.btn:hover {
+    background-color: var(--btn-hover);
+}
+
+.btn:active {
+    transform: scale(0.95);
+    background-color: var(--btn-active);
+}
+
+.span-two {
+    grid-column: span 2;
+    border-radius: 35px;
+    /* Pill shape for span-two */
+    aspect-ratio: auto;
+}
+
+.operator {
+    background-color: var(--accent-color);
+    color: #000;
+    /* Contrast for orange button */
+    font-weight: 600;
+}
+
+.operator:hover {
+    background-color: var(--accent-hover);
+}
+
+.equals {
+    background-color: var(--accent-color);
+    color: #000;
+    font-weight: 600;
+}
+
+.equals:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Special styling for Clear/Delete if desired, or keep uniform */
 .btn[data-action="clear"],
 .btn[data-action="delete"] {
     color: var(--danger-color);
@@ -207,4 +383,55 @@ body {
     .btn {
         font-size: 1rem;
     }
+}
+
+/* Neon Ox Sign */
+.neon-sign {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    pointer-events: none;
+    /* Let clicks pass through if it overlaps something */
+}
+
+.ox-svg {
+    filter: drop-shadow(0 0 2px #ff0055) drop-shadow(0 0 5px #ff0055) drop-shadow(0 0 10px #ff0055);
+}
+
+.neon-tube {
+    animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+        opacity: 1;
+        stroke: #ff0055;
+        fill: #ff0055;
+        /* For eyes/filled parts */
+    }
+
+    20%,
+    24%,
+    55% {
+        opacity: 0.5;
+        stroke: #55001b;
+        /* Dimmed color */
+        fill: #55001b;
+    }
+}
+
+/* Adjust specific parts if needed */
+path.neon-tube,
+ellipse.neon-tube {
+    fill: none !important;
+    /* Ensure paths/ellipses don't get filled by the animation override */
 }
