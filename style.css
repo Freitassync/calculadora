@@ -1,0 +1,145 @@
+:root {
+    --bg-color: #121212;
+    --calc-bg: #1e1e1e;
+    --text-main: #ffffff;
+    --text-secondary: #a0a0a0;
+    --btn-bg: #2d2d2d;
+    --btn-hover: #3d3d3d;
+    --btn-active: #4d4d4d;
+    --accent-color: #ff9f0a; /* Apple-like orange for operators */
+    --accent-hover: #ffb340;
+    --danger-color: #ff453a; /* Soft red for clear/delete */
+    --font-family: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.calculator {
+    background-color: var(--calc-bg);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    padding: 24px;
+    overflow: hidden;
+}
+
+.display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 120px;
+    margin-bottom: 20px;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.previous-operand {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    min-height: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.current-operand {
+    color: var(--text-main);
+    font-size: 3rem;
+    font-weight: 300;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.btn {
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: var(--btn-bg);
+    color: var(--text-main);
+    font-size: 1.25rem;
+    font-family: inherit;
+    border-radius: 50%; /* Circular buttons */
+    cursor: pointer;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    user-select: none;
+}
+
+.btn:hover {
+    background-color: var(--btn-hover);
+}
+
+.btn:active {
+    transform: scale(0.95);
+    background-color: var(--btn-active);
+}
+
+.span-two {
+    grid-column: span 2;
+    border-radius: 35px; /* Pill shape for span-two */
+    aspect-ratio: auto;
+}
+
+.operator {
+    background-color: var(--accent-color);
+    color: #000; /* Contrast for orange button */
+    font-weight: 600;
+}
+
+.operator:hover {
+    background-color: var(--accent-hover);
+}
+
+.equals {
+    background-color: var(--accent-color);
+    color: #000;
+    font-weight: 600;
+}
+
+.equals:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Special styling for Clear/Delete if desired, or keep uniform */
+.btn[data-action="clear"],
+.btn[data-action="delete"] {
+    color: var(--danger-color);
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 350px) {
+    .current-operand {
+        font-size: 2.5rem;
+    }
+    .btn {
+        font-size: 1rem;
+    }
+}
