@@ -66,10 +66,14 @@ class Calculator {
         const integerDigits = parseFloat(stringNumber.split('.')[0]);
         const decimalDigits = stringNumber.split('.')[1];
         let integerDisplay;
-        if (isNaN(integerDigits)) {
+        if (isNaN(parseFloat(integerDigits))) {
             integerDisplay = '';
         } else {
-            integerDisplay = integerDigits.toLocaleString('pt-BR', { maximumFractionDigits: 0 });
+            try {
+                integerDisplay = BigInt(stringNumber.split('.')[0]).toLocaleString('pt-BR');
+            } catch {
+                integerDisplay = integerDigits.toLocaleString('pt-BR', { maximumFractionDigits: 0 });
+            }
         }
         if (decimalDigits != null) {
             return `${integerDisplay},${decimalDigits}`;
@@ -81,10 +85,20 @@ class Calculator {
     updateDisplay() {
         this.currentOperandTextElement.innerText = this.getDisplayNumber(this.currentOperand);
         if (this.operation != null) {
-            this.previousOperandTextElement.innerText = 
+            this.previousOperandTextElement.innerText =
                 `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`;
         } else {
             this.previousOperandTextElement.innerText = '';
+        }
+
+        // Dynamic font size adjustment
+        const currentText = this.currentOperandTextElement.innerText;
+        if (currentText.length > 15) {
+            this.currentOperandTextElement.style.fontSize = '1.75rem';
+        } else if (currentText.length > 10) {
+            this.currentOperandTextElement.style.fontSize = '2.25rem';
+        } else {
+            this.currentOperandTextElement.style.fontSize = '3rem';
         }
     }
 }
